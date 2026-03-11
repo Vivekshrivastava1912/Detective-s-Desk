@@ -32,9 +32,7 @@ const token = request.cookies.accessToken ||
 
         next()
 
-        console.log('decode', decode)
     }
-
 
     catch (error) {
         return response.status(500).json({
