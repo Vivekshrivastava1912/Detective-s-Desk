@@ -1,14 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import './App.css'
-import Homepage from './pages/Homepage'
-
+import Home from './pages/Home'
+import Login from './pages/Login'
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
     <>
-      <Homepage/>
+      <Home/>
+      <Login/>
     </>
   )
 }
