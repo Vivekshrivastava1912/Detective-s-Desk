@@ -1,15 +1,18 @@
-import { useEffect, useState } from 'react'
+import React from 'react'
+import { Outlet } from 'react-router-dom'
+import Header from './component/Header'
+// Apne header ka sahi path daalein
 
-import './App.css'
-import Home from './pages/Home'
-import Login from './pages/Login'
 function App() {
-  
-
   return (
     <>
-      <Home/>
-      <Login/>
+      {/* Header hamesha top par dikhega */}
+      <Header/>
+      
+      {/* Ye sabse zaroori hai! Yahan par aapke Login, Register wale pages load honge */}
+      <main className='min-h-screen'>
+        <Outlet /> 
+      </main>
     </>
   )
 }
