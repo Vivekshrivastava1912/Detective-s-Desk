@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+
+body {
+  font-weight: 400;
+  font-style: normal;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  background: linear-gradient(135deg, #ffffff 0%, #e9d5ff 100%);
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
