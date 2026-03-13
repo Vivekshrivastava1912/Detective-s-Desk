@@ -47,10 +47,10 @@ const Login = () => {
         localStorage.setItem('refreshtoken',response.data.data.refreshtoken)
         setData({ email: "", password: "" })
         
-        // --- CHANGE MADE HERE ---
-        // navigate("/") ko hata kar window.location.href lagaya hai
-        // Taki page reload ho aur Header update ho jaye
-        window.location.href = "/" 
+        // Toast dikhne ke liye thoda wait karo, phir redirect karo
+        setTimeout(() => {
+          window.location.href = "/"
+        }, 1500)
       }
     } catch (error) {
       toast.error(error?.response?.data?.message || "Something went wrong")

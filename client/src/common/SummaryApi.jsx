@@ -12,6 +12,12 @@ const SummaryApi = {
         method: "post"
     },
 
+    logout : {
+        url: '/api/user/logout',
+        method: "get"
+    }
+,
+
     ForgotPassword: {
         url: '/api/user/forget-password',
         method: "put"
