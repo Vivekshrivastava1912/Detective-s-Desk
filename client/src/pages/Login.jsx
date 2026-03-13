@@ -2,55 +2,37 @@ import React, { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import Axios from '../utils/Axios'
 import SummaryApi from '../common/SummaryApi'
-import { IoEyeOutline, IoEyeOffOutline, IoArrowBack } from "react-icons/io5"; 
-import { Link, useNavigate } from 'react-router-dom';
+import { IoEyeOutline, IoEyeOffOutline, IoArrowBack } from "react-icons/io5"
+import { Link, useNavigate } from 'react-router-dom'
 
 const Login = () => {
-  const navigate = useNavigate() 
+  const navigate = useNavigate()
 
-  const [data, setData] = useState({
-    email: "",
-    password: ""
-  })
-
+  const [data, setData] = useState({ email: "", password: "" })
   const [showPassword, setShowPassword] = useState(false)
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setData((preve) => {
-      return { ...preve, [name]: value }
-    })
+    setData((preve) => ({ ...preve, [name]: value }))
   }
 
-  // Check if both fields are filled
   const valideValue = Object.values(data).every(el => el)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
     try {
       const response = await Axios({
-        ...SummaryApi.login, // Make sure SummaryApi has login endpoint
+        ...SummaryApi.login,
         data: data,
-        withCredentials: true // <--- SIRF YE LINE ADD KI HAI COOKIES KE LIYE
+        withCredentials: true
       })
-
-      if (response.data.error) {
-        toast.error(response.data.message) 
-      }
-
+      if (response.data.error) toast.error(response.data.message)
       if (response.data.success) {
         toast.success(response.data.message)
-        
-        // Storing token/user
-        localStorage.setItem('accesstoken',response.data.data.accesstoken)
-        localStorage.setItem('refreshtoken',response.data.data.refreshtoken)
+        localStorage.setItem('accesstoken', response.data.data.accesstoken)
+        localStorage.setItem('refreshtoken', response.data.data.refreshtoken)
         setData({ email: "", password: "" })
-        
-        // Toast dikhne ke liye thoda wait karo, phir redirect karo
-        setTimeout(() => {
-          window.location.href = "/"
-        }, 1500)
+        setTimeout(() => { window.location.href = "/" }, 1500)
       }
     } catch (error) {
       toast.error(error?.response?.data?.message || "Something went wrong")
@@ -58,77 +40,125 @@ const Login = () => {
   }
 
   return (
-    <section className='fixed inset-0 z-50 flex items-center justify-center bg-white/10 backdrop-blur-md p-4'>
+    <section className='fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4'>
       
-      <div className='bg-white w-full max-w-md p-8 rounded-2xl shadow-2xl border border-purple-100 relative overflow-hidden'>
-        
-        {/* Back Button */}
-        <button 
-          onClick={() => navigate("/")} 
-          className='absolute top-5 left-5 text-gray-400 hover:text-purple-600 transition-colors flex items-center gap-1 text-sm font-medium'
-        >
-          <IoArrowBack size={20}/> Back
-        </button>
+      {/* Subtle grid lines background */}
+      <div className='absolute inset-0 opacity-5'
+        style={{
+          backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+          backgroundSize: '40px 40px'
+        }}
+      />
 
-        <div className='text-center mb-8 mt-4'>
-            <h2 className='text-3xl font-bold text-gray-800 tracking-tight'>FlashMart</h2>
-            <p className='text-purple-600 font-medium mt-2'>Welcome Back! Please Login</p>
-        </div>
+      {/* Card */}
+      <div className='relative z-10 w-full max-w-md'>
 
-        <form onSubmit={handleSubmit} className='space-y-5'>
-          
-          <div className='space-y-1'>
-            <label htmlFor='email' className='block text-sm font-semibold text-gray-700 ml-1'>Email</label>
-            <input 
-              type="email"
-              id='email'
-              autoFocus
-              value={data.email}
-              name='email'
-              onChange={handleChange}
-              className='w-full px-4 py-3 rounded-xl bg-purple-50 border border-transparent focus:border-purple-300 focus:bg-white focus:ring-2 focus:ring-purple-200 outline-none transition-all duration-200'
-              placeholder='Enter Your Email'
-            />
+        {/* Glowing top border */}
+        <div className='h-px w-full bg-linear-to-r from-transparent via-white to-transparent mb-0.5 opacity-60' />
+
+        <div className='bg-[#0a0a0a] border border-white/10 rounded-2xl p-8 shadow-[0_0_60px_rgba(0,0,0,0.8)] relative overflow-hidden'>
+
+          {/* Corner accent */}
+          <div className='absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-bl-full' />
+
+          {/* Back Button */}
+          <button
+            onClick={() => navigate("/")}
+            className='flex items-center gap-1.5 text-white/40 hover:text-white transition-all duration-300 text-sm font-medium mb-8 group'
+          >
+            <IoArrowBack size={16} className='group-hover:-translate-x-1 transition-transform duration-300' />
+            Back
+          </button>
+
+          {/* Header */}
+          <div className='mb-8'>
+            <h1 className='text-3xl font-black text-white tracking-tight'>
+              Detective's <span className='text-white/40'>Desk</span>
+            </h1>
+            <p className='text-white/30 text-sm mt-1 font-light tracking-widest uppercase'>Welcome Back</p>
+            <div className='mt-4 h-px bg-linear-to-r from-white/20 to-transparent' />
           </div>
 
-          <div className='space-y-1'>
-            <div className='flex justify-between items-center px-1'>
-                <label htmlFor='password' title='className used instead of class' className='block text-sm font-semibold text-gray-700'>Password</label>
-                {/* YAHAN CHANGE KIYA HAI: to="/forgotpassword" set kiya hai */}
-                <Link to="/forgotpassword" title="Redirecting to Register..." className='text-xs text-purple-600 hover:underline'>Forgot password?</Link>
+          {/* Form */}
+          <form onSubmit={handleSubmit} className='space-y-5'>
+
+            {/* Email */}
+            <div className='space-y-1.5'>
+              <label htmlFor='email' className='block text-xs font-semibold text-white/50 tracking-widest uppercase'>
+                Email
+              </label>
+              <input
+                type="email"
+                id='email'
+                autoFocus
+                value={data.email}
+                name='email'
+                onChange={handleChange}
+                className='w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 focus:border-white/40 focus:bg-white/10 focus:outline-none transition-all duration-300 text-sm'
+                placeholder='your@email.com'
+              />
             </div>
-            <div className='relative flex items-center'>
-                <input 
+
+            {/* Password */}
+            <div className='space-y-1.5'>
+              <div className='flex justify-between items-center'>
+                <label htmlFor='password' className='block text-xs font-semibold text-white/50 tracking-widest uppercase'>
+                  Password
+                </label>
+                <Link to="/forgotpassword" className='text-xs text-white/30 hover:text-white transition-colors duration-300'>
+                  Forgot password?
+                </Link>
+              </div>
+              <div className='relative'>
+                <input
                   type={showPassword ? "text" : "password"}
                   id='password'
                   value={data.password}
                   name='password'
                   onChange={handleChange}
-                  className='w-full px-4 py-3 rounded-xl bg-purple-50 border border-transparent focus:border-purple-300 focus:bg-white focus:ring-2 focus:ring-purple-200 outline-none transition-all duration-200'
-                  placeholder='Enter Password' 
+                  className='w-full px-4 py-3 pr-11 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 focus:border-white/40 focus:bg-white/10 focus:outline-none transition-all duration-300 text-sm'
+                  placeholder='••••••••'
                 />
-                <div onClick={() => setShowPassword(prev => !prev)} className='absolute right-3 cursor-pointer text-gray-500 hover:text-purple-600'>
-                    { showPassword ? <IoEyeOutline size={20}/> : <IoEyeOffOutline size={20}/> }
-                </div>
+                <button
+                  type='button'
+                  onClick={() => setShowPassword(prev => !prev)}
+                  className='absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white transition-colors duration-300'
+                >
+                  {showPassword ? <IoEyeOutline size={18} /> : <IoEyeOffOutline size={18} />}
+                </button>
+              </div>
             </div>
-          </div>
 
-          <button 
-            disabled={!valideValue} 
-            className={`w-full py-3.5 rounded-xl font-bold text-white shadow-md transform transition-all duration-300 active:scale-95 
-              ${valideValue 
-                ? "bg-purple-600 hover:bg-purple-700 cursor-pointer" 
-                : "bg-gray-300 cursor-not-allowed"}`}
-          >
-            Login
-          </button>
+            {/* Submit Button */}
+            <button
+              disabled={!valideValue}
+              className={`w-full py-3.5 rounded-xl font-bold text-sm tracking-widest uppercase transition-all duration-300 active:scale-95 mt-2
+                ${valideValue
+                  ? "bg-white text-black hover:bg-white/90 shadow-[0_0_30px_rgba(255,255,255,0.15)] cursor-pointer"
+                  : "bg-white/10 text-white/20 cursor-not-allowed"
+                }`}
+            >
+              Sign In
+            </button>
 
-          <p className='text-center text-sm text-gray-500 mt-4'>
-            Don't have an account? <Link to={"/register"} className='text-purple-700 font-bold hover:underline cursor-pointer ml-1'>
-              Register
-            </Link>
-          </p>
-        </form>
+            {/* Divider */}
+            <div className='flex items-center gap-3 my-2'>
+              <div className='flex-1 h-px bg-white/10' />
+              <span className='text-white/20 text-xs'>or</span>
+              <div className='flex-1 h-px bg-white/10' />
+            </div>
+
+            <p className='text-center text-sm text-white/30'>
+              New here?{' '}
+              <Link to="/register" className='text-white font-semibold hover:opacity-70 transition-opacity'>
+                Create Account
+              </Link>
+            </p>
+          </form>
+        </div>
+
+        {/* Glowing bottom border */}
+        <div className='h-px w-full bg-linear-to-r from-transparent via-white to-transparent mt-0.5 opacity-20' />
       </div>
     </section>
   )

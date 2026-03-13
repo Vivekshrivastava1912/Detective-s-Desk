@@ -7,7 +7,7 @@ body {
   scrollbar-width: none;
   -ms-overflow-style: none;
 
-  background: linear-gradient(135deg, #ffffff 0%, #e9d5ff 100%);
+  background: linear-gradient(105deg, #434444 0%,  #000000 100%);
 }
 
 body::-webkit-scrollbar {
