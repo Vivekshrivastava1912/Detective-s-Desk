@@ -42,19 +42,13 @@ const Login = () => {
   return (
     <section className='fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4'>
       
-      {/* Subtle grid lines background */}
-      <div className='absolute inset-0 opacity-5'
-        style={{
-          backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
-          backgroundSize: '40px 40px'
-        }}
-      />
+      
 
       {/* Card */}
       <div className='relative z-10 w-full max-w-md'>
 
         {/* Glowing top border */}
-        <div className='h-px w-full bg-linear-to-r from-transparent via-white to-transparent mb-0.5 opacity-60' />
+        <div className='' />
 
         <div className='bg-[#0a0a0a] border border-white/10 rounded-2xl p-8 shadow-[0_0_60px_rgba(0,0,0,0.8)] relative overflow-hidden'>
 
@@ -73,10 +67,10 @@ const Login = () => {
           {/* Header */}
           <div className='mb-8'>
             <h1 className='text-3xl font-black text-white tracking-tight'>
-              Detective's <span className='text-white/40'>Desk</span>
+              Detective's <span className='text-white/40 hover:text-white/50'>Desk</span>
             </h1>
             <p className='text-white/30 text-sm mt-1 font-light tracking-widest uppercase'>Welcome Back</p>
-            <div className='mt-4 h-px bg-linear-to-r from-white/20 to-transparent' />
+            <div className='mt-4 h-1 bg-linear-to-r from-white/30 to-transparent' />
           </div>
 
           {/* Form */}
@@ -117,7 +111,7 @@ const Login = () => {
                   name='password'
                   onChange={handleChange}
                   className='w-full px-4 py-3 pr-11 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 focus:border-white/40 focus:bg-white/10 focus:outline-none transition-all duration-300 text-sm'
-                  placeholder='••••••••'
+                  placeholder='•••••'
                 />
                 <button
                   type='button'

@@ -43,10 +43,7 @@ const Register = () => {
 
       {/* Grid background */}
       <div className='absolute inset-0 opacity-5'
-        style={{
-          backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
-          backgroundSize: '40px 40px'
-        }}
+      
       />
 
       <div className='relative z-10 w-full max-w-md'>

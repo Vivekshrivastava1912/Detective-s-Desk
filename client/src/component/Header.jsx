@@ -27,23 +27,10 @@ const Header = () => {
   const menuRef = useRef(null)
 
   // Scroll effect — add backdrop when scrolled
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  
 
   // Close dropdown on outside click
-  useEffect(() => {
-    const handleClick = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setOpenUserMenu(false)
-      }
-    }
-    document.addEventListener('mousedown', handleClick)
-    return () => document.removeEventListener('mousedown', handleClick)
-  }, [])
-
+  
   // Close mobile menu on route change
   useEffect(() => {
     setMobileMenuOpen(false)
@@ -71,11 +58,7 @@ const Header = () => {
   return (
     <>
       <header
-        className={`fixed top-0 w-full z-50 transition-all duration-700
-          ${scrolled
-            ? 'bg-black/80 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_40px_rgba(0,0,0,0.8)] py-2'
-            : 'bg-linear-to-b from-black/90 to-transparent pt-6 pb-4'
-          }`}
+       className='bg-black p-3'
       >
         <div className='max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between'>
 
@@ -86,7 +69,7 @@ const Header = () => {
           >
             {/* Icon mark */}
             <div className='relative  rounded-xl overflow-hidden flex items-center justify-center
-                            border border-white/20 bg-white/5 group-hover:bg-white/10 group-hover:border-white/50 
+                            border border-white/10 bg-white/5 group-hover:bg-white/10 group-hover:border-white/50 
                             transition-all duration-500 shadow-[0_0_15px_rgba(255,255,255,0.05)]
                             group-hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]'
             >
