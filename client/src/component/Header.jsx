@@ -8,9 +8,10 @@ import Axios from '../utils/Axios'
 import SummaryApi from '../common/SummaryApi'
 
 const NAV_LINKS = [
-  { label: 'Home', to: '/' },
+  { label: 'Home', to: '/home' },
   { label: 'Problem', to: '/register' },
   { label: 'Rules', to: '/login' },
+  { label: 'Learn SQL', to: '/learnsql' }
 ]
 
 const Header = () => {
@@ -58,13 +59,13 @@ const Header = () => {
   return (
     <>
       <header
-       className='bg-black p-3'
+       className='bg-black p-3 sticky top-0 z-50'
       >
         <div className='max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between'>
 
           {/* ── LOGO (Animated Hover) ── */}
           <Link
-            to='/'
+            to='/home'
             className='flex items-center gap-3 group select-none relative z-50'
           >
             {/* Icon mark */}
@@ -278,14 +279,8 @@ const Header = () => {
       </header>
 
       {/* spacer to prevent content from hiding under fixed header */}
-      <div className="h-24"></div>
       
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes scan {
-          0% { transform: translateY(-100%); }
-          100% { transform: translateY(100%); }
-        }
-      `}} />
+      
     </>
   )
 }

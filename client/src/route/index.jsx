@@ -7,6 +7,8 @@ import ForgotPassword from "../pages/ForgotPassword";
 
 import ResetPassword from "../pages/ResetPassword";
 import VerifyOtp from "../pages/verifyOtp";
+import Homepage from "../pages/Home";
+import LearnSql from "../pages/LearnSql";
 
 
 const router = createBrowserRouter([{
@@ -44,6 +46,15 @@ const router = createBrowserRouter([{
     element: <ResetPassword />
 
   },
+  {
+    path: "home",
+    element: <Homepage/>
+  },
+
+  {
+    path : "learnsql",
+    element : <LearnSql/>
+  }
     ]
 }])
 export default router
