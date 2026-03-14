@@ -87,7 +87,7 @@ const Avidences = () => {
       </div>
 
       {/* Grid Container for Cards */}
-   <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto px-4'>
+   <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl md:max-w-8xl mx-auto px-4'>
   {avidences.map((item) => (
     <div 
       key={item.id} 
@@ -128,7 +128,7 @@ const Avidences = () => {
     </div>
   ))}
 </div>
-      <div className='bg-red-600/50 w-full h-px my-10'></div>
+     
       
     </div></>
   )

@@ -437,7 +437,7 @@ CREATE TABLE logs_2023 PARTITION OF logs FOR VALUES FROM ('2023-01-01') TO ('202
 
 const LearnSql = () => {
   return (
-    <div className="min-h-screen bg-[#202222] font-sans text-gray-300 selection:bg-white/10 selection:text-white">
+    <div className="min-h-screen bg-[#1a1a1a] font-sans text-gray-300 selection:bg-white/10 selection:text-white">
       {/* Main Content */}
       <div className="max-w-4xl mx-auto px-6 py-12 md:py-24">
         <header className="mb-16 border-b border-white/5 pb-10">
