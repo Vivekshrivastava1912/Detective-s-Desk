@@ -8,7 +8,7 @@ import Axios from '../utils/Axios'
 import SummaryApi from '../common/SummaryApi'
 
 const NAV_LINKS = [
-  { label: 'Home', to: '/home' },
+  { label: 'Home', to: '/' },
   { label: 'Problem', to: '/register' },
   { label: 'Rules', to: '/login' },
   { label: 'Learn SQL', to: '/learnsql' }
@@ -65,7 +65,7 @@ const Header = () => {
 
           {/* ── LOGO (Animated Hover) ── */}
           <Link
-            to='/home'
+            to='/'
             className='flex items-center gap-3 group select-none relative z-50'
           >
             {/* Icon mark */}
@@ -276,6 +276,7 @@ const Header = () => {
             )}
           </div>
         </div>
+        <div className='mt-4 h-px bg-linear-to-r from-white/20 to-red-600/20' />
       </header>
 
       {/* spacer to prevent content from hiding under fixed header */}

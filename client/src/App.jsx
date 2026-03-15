@@ -2,6 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import Header from './component/Header'
+import Homepage from './pages/Home'
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
 
       {/* Header hamesha top par dikhega */}
       <Header/>
+     
       
       {/* Ye sabse zaroori hai! Yahan par aapke Login, Register wale pages load honge */}
       <main className='min-h-screen'>
