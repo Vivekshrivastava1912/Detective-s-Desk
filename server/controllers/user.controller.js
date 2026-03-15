@@ -406,75 +406,70 @@ export async function forgotPasswordController(request, response) {
 
 //--------------------------------------------------verify forgot password otp ----------------------------------------------------------------------//
 export async function verifyForgotPasswordOtp(request, response) {
-
     try {
+        const { email, otp } = request.body;
 
-        const { email, otp } = request.body
+        // 1. Check if email and otp are provided
         if (!email || !otp) {
             return response.status(400).json({
-                message: "please provide required field email and otp ...",
-                erro: true,
+                message: "Please provide required fields: email and otp...",
+                error: true, // Typo fixed (pehle 'erro' tha)
                 success: false
-            })
-
+            });
         }
-          
 
-        const user = await UserModel.findOne({ email })
+        // 2. Find the user
+        const user = await UserModel.findOne({ email });
         if (!user) {
             return response.status(400).json({
-
-                message: "Email not available ....",
+                message: "Email not available....",
                 error: true,
                 success: false
-
-            })
+            });
         }
 
-        const currentTime = new Date().toISOString()
-        if (user.forget_password_expiry < currentTime) {
+        // 3. Check if OTP is expired (Using safe time comparison)
+        const currentTime = new Date().getTime();
+        const expiryTime = new Date(user.forget_password_expiry).getTime();
+
+        if (currentTime > expiryTime) {
             return response.status(400).json({
                 message: "OTP is expired",
                 error: true,
                 success: false
-            })
-
-
+            });
         }
 
-
-        if (otp != user.forget_password_otp) {
+        // 4. Check if OTP matches (Using String & trim to prevent type/space mismatch)
+        // console.log("Postman OTP:", String(otp).trim(), "| DB OTP:", String(user.forget_password_otp).trim());
+        
+        if (String(otp).trim() !== String(user.forget_password_otp).trim()) {
             return response.status(400).json({
                 message: "Invalid OTP ...",
                 error: true,
                 success: false
-            })
+            });
         }
 
-      
-
-        // if the otp is not expired 
-        // if the otp is same as email otp then
-
-     const updateUser = await UserModel.findByIdAndUpdate(user?._id , {
-        forget_password_otp : "" ,
-        forget_password_expiry :""
-     })
+        // 5. Clear OTP and Expiry after successful verification
+        // (Date field mein khali string "" daalne se Mongoose error de sakta hai, isliye null use karein)
+        const updateUser = await UserModel.findByIdAndUpdate(user?._id, {
+            forget_password_otp: "",
+            forget_password_expiry: null 
+        });
 
         return response.json({
-            message: " Verify OTP successfully ... ",
+            message: "Verify OTP successfully ...",
             error: false,
             success: true
-        })
+        });
 
-
-    }
-    catch (error) {
+    } catch (error) {
         return response.status(500).json({
             message: error.message || error,
             error: true,
             success: false
-        })
+        });
     }
 }
 
